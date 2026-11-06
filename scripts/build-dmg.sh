@@ -60,6 +60,6 @@ Installing Dad Flow
 Everything runs on your Mac. Nothing you say is ever sent anywhere.
 TXT
 rm -f "$DIST/DadFlow.dmg"
-hdiutil create -volname "$APP_NAME" -srcfolder "$STAGE" -ov -format UDZO "$DIST/DadFlow-$VERSION.dmg" >/dev/null
+hdiutil create -volname "$APP_NAME" -srcfolder "$STAGE" -ov -format UDZO "$DIST/DadFlow.dmg" >/dev/null
 rm -rf "$STAGE"
-echo "==> Done: $DIST/DadFlow-$VERSION.dmg"
+echo "==> Done: $DIST/DadFlow.dmg (version $VERSION)"

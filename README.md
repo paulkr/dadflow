@@ -67,7 +67,7 @@ Most dictation apps record, wait for you to stop, send your voice to a server, r
 
 ## Install
 
-1. Download `DadFlow-x.y.dmg` from the **Releases** page (or [build it yourself](#build-from-source)).
+1. Download [**DadFlow.dmg**](https://github.com/paulkr/dadflow/releases/latest/download/DadFlow.dmg) from the latest [release](https://github.com/paulkr/dadflow/releases/latest) (or [build it yourself](#build-from-source)).
 2. Open the DMG and drag **Dad Flow** into **Applications**.
 3. Open it. Release builds are ad-hoc signed, not notarized, so macOS will say it can't verify the developer.
    Click **Done**, then go to **System Settings → Privacy & Security** and click **Open Anyway**. You only need to do this once.
@@ -93,9 +93,9 @@ Most dictation apps record, wait for you to stop, send your voice to a server, r
 You need the Xcode **Command Line Tools** (full Xcode isn't required).
 
 ```sh
-git clone <this repo>
+git clone https://github.com/paulkr/dadflow.git
 cd dadflow
-./scripts/build-dmg.sh          # → dist/DadFlow-1.0.dmg  (and dist/Dad Flow.app)
+./scripts/build-dmg.sh          # → dist/DadFlow.dmg  (and dist/Dad Flow.app)
 ```
 
 For development:
