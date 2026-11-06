@@ -113,6 +113,27 @@ final class OverlayController {
         }
     }
 
+    /// `visibleFrame` always leaves room for the Dock, even in a full-screen app where the
+    /// Dock is hidden. So when the Dock's window isn't actually on screen, use the whole
+    /// screen (still staying below the menu bar).
+    private func usableFrame(of screen: NSScreen) -> NSRect {
+        let visible = screen.visibleFrame
+        guard !Self.dockOnScreen else { return visible }
+        var f = screen.frame
+        f.size.height = visible.maxY - f.minY
+        return f
+    }
+
+    /// The Dock draws in a window at the Dock level (20). It's only listed as on-screen
+    /// when the Dock is showing in the current space.
+    private static var dockOnScreen: Bool {
+        guard let windows = CGWindowListCopyWindowInfo([.optionOnScreenOnly], kCGNullWindowID) as? [[String: Any]] else { return true }
+        return windows.contains {
+            ($0[kCGWindowOwnerName as String] as? String) == "Dock"
+                && ($0[kCGWindowLayer as String] as? Int) == Int(CGWindowLevelForKey(.dockWindow))
+        }
+    }
+
     func layout() {
         let visible = dictation.phase != .idle || dictation.message != nil || settings.showBarWhenIdle
         guard visible, let screen = targetScreen else {
@@ -120,7 +141,7 @@ final class OverlayController {
             return
         }
         let s = size()
-        let f = screen.visibleFrame
+        let f = usableFrame(of: screen)
         let margin: CGFloat = 10
         let origin: NSPoint
         switch settings.position {
